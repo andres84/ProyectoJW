@@ -23,9 +23,13 @@ and open the template in the editor.
             <p:fieldset legend="Datos Personales">
 
                 <h:panelGrid columns="3" id="pgDatos">
+                    
+                    
+                    
                     <p:outputLabel for="txtNombres" value="Nombres"/>
                     <p:inputText id="txtNombres" value="#{usuarioController.persona.nombres}" required="true"/>
                     <p:message for="txtNombres"/>
+                    
                     <p:outputLabel for="txtApellidos" value="Apellidos"/>
                     <p:inputText id="txtApellidos" value="#{usuarioController.persona.apellidos}" required="true"/>
                     <p:message for="txtApellidos"/>
@@ -49,22 +53,35 @@ and open the template in the editor.
 
             <p:fieldset legend="Datos de la Cuenta">
 
-                <h:panelGrid columns="2" id="pgCuenta">
+                <h:panelGrid columns="1" id="pgCuenta">
 
-                    <p:outputLabel value="Usuario"/>
-                    <p:inputText value="#{usuarioController.usuario.usuario}" required="true"/>
+                    <p:outputLabel value="Tipo de cuenta"/>
+                    <p:selectOneMenu value="#{usuarioController.usuario.tipo}" required="true">
+                    
+                        <f:selectItem itemValue="A" itemLabel="Administrador"/>
+                        <f:selectItem itemValue="O" itemLabel="Operario"/>
+                    
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="txtUsuario" value="Usuario"/>
+                    <p:inputText id="txtUsuario" value="#{usuarioController.usuario.usuario}" required="true"/>
+                    <p:message for="txtUsuario"/>
 
-                    <p:outputLabel value="Clave"/>
-                    <p:password id="clave1" value="#{usuarioController.usuario.clave}" 
+                    <p:outputLabel for="clave1" value="Clave"/>
+                    <p:password id="clave1" value="#{usuarioController.usuario.clave}" required="true" requiredMessage="Campo Requerido"
+                                validatorMessage="Las claves no coinciden"
                                 weakLabel="Debil" strongLabel="Fuerte" goodLabel="Bueno"
-                                match="clave2" feedback="true" promptLabel="Ingrese una clave" required="true"/>
-
-                    <p:outputLabel value="Repetir Clave"/>
-                    <p:password id="clave2" required="true"/>
-
+                                match="clave2" feedback="true" promptLabel="Ingrese una clave"/>
+                    <p:message for="clave1"/>
+                    
+                    <p:outputLabel for="clave2" value="Repetir Clave"/>
+                    <p:password id="clave2" required="true" requiredMessage="Campo Requerido"/>
+                    <p:message for="clave2"/>
+               
                 </h:panelGrid>
                 
-                <p:commandButton icon="ui-icon-chek" value="Registrar" update="pgDatos, pgCuenta"/>
+                <p:commandButton icon="ui-icon-chek" value="Registrar" update="pgDatos, pgCuenta" 
+                                 actionListener="#{usuarioController.registrar()}"/>
                 
             </p:fieldset>
         </h:form>

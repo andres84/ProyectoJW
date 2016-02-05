@@ -7,6 +7,7 @@ package Model;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ import javax.persistence.Table;
 public class Usuario implements Serializable{
     
     @Id
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)//cuando se persista una insercion a la pabla persona tambiem va a persistir a la tabla usuario
     @JoinColumn(name = "codigo", nullable = false)
     private Persona codigo;
     

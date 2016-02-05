@@ -1,10 +1,12 @@
 
 package Controller;
 
+import Ejb.UsuarioFacadeLocal;
 import Model.Persona;
 import Model.Usuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -12,6 +14,9 @@ import javax.inject.Named;
 @Named
 @ViewScoped
 public class UsuarioController implements Serializable{
+    
+    @EJB
+    private UsuarioFacadeLocal usuarioEJB;
     
     private Usuario usuario;
     private Persona persona;
@@ -40,4 +45,19 @@ public class UsuarioController implements Serializable{
         this.persona = persona;
     }
     
+    public void registrar(){
+        
+        try {
+            
+            this.usuario.setCodigo(persona);
+            usuarioEJB.create(usuario);
+            //mensaje
+            
+            
+        } catch (Exception e) {
+            
+            //mensaje
+        }
+        
+    }
 }
