@@ -11,19 +11,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "categoria")
-public class Categoria implements Serializable{
-   
+@Table(name = "telefono")
+public class Telefono implements Serializable{
+
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigo;
-    @Column(name = "nombre")
-    private String nombre;
-    @Column(name = "estado")
-    private boolean estado = true;
+    
+    @ManyToOne
+    @JoinColumn(name = "codigo_persona")
+    private Persona persona;
+    @Column(name = "numero")
+    private String numero;
 
     public int getCodigo() {
         return codigo;
@@ -33,26 +38,26 @@ public class Categoria implements Serializable{
         this.codigo = codigo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Persona getPersona() {
+        return persona;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 43 * hash + this.codigo;
+        hash = 53 * hash + this.codigo;
         return hash;
     }
 
@@ -64,7 +69,7 @@ public class Categoria implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Categoria other = (Categoria) obj;
+        final Telefono other = (Telefono) obj;
         if (this.codigo != other.codigo) {
             return false;
         }
@@ -73,8 +78,10 @@ public class Categoria implements Serializable{
 
     @Override
     public String toString() {
-        return "Categoria{" + "codigo=" + codigo + '}';
+        return "Telefono{" + "codigo=" + codigo + '}';
     }
+    
+    
     
     
 }
