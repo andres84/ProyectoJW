@@ -7,6 +7,8 @@ import Model.Usuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -51,12 +53,12 @@ public class UsuarioController implements Serializable{
             
             this.usuario.setCodigo(persona);
             usuarioEJB.create(usuario);
-            //mensaje
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Aviso","Registro Exitoso!!!"));
             
             
         } catch (Exception e) {
             
-            //mensaje
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Aviso","Error!!!"));
         }
         
     }

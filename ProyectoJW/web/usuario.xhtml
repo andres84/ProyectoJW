@@ -17,8 +17,8 @@ and open the template in the editor.
     <body>
         
         <h:form>
-            
-            <p:messages id="mensaje" autoUpdate="false" />
+            <!--<p:messages id="mensaje" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true" />-->
+            <p:growl id="mensaje" autoUpdate="false" severity="info, fatal" showSummary="true" showDetail="true" />
             
             <p:fieldset legend="Datos Personales">
 
@@ -80,7 +80,7 @@ and open the template in the editor.
                
                 </h:panelGrid>
                 
-                <p:commandButton icon="ui-icon-chek" value="Registrar" update="pgDatos, pgCuenta" 
+                <p:commandButton icon="ui-icon-chek" value="Registrar" update="pgDatos, pgCuenta, mensaje" 
                                  actionListener="#{usuarioController.registrar()}"/>
                 
             </p:fieldset>
